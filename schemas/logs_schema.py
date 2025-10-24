@@ -6,19 +6,17 @@ from pydantic import BaseModel
 # 🧱 BASE
 # =====================================================
 class LogBase(BaseModel):
-    id_devices: int 
+    id_device: int  # ✅ Corregir: era "id_devices"
     id_user: int
-    id_action: Optional[int] = None
+    id_action: Optional[int] = None  # ✅ Ya está bien
     event: str
-    status: str
-
+    status: Optional[str] = None  # ✅ Hacer opcional si no siempre se usa
 
 # =====================================================
 # 🆕 CREATE
 # =====================================================
 class LogCreate(LogBase):
     pass
-
 
 # =====================================================
 # 📖 READ
@@ -29,8 +27,6 @@ class LogRead(LogBase):
 
     class Config:
         from_attributes = True
-
-
 # =====================================================
 # 🔎 FILTROS Y PAGINACIÓN
 # =====================================================
@@ -55,6 +51,8 @@ class LogReadPaginated(BaseModel):
     data: List[LogRead]  # Asegúrate de usar LogRead aquí
     counts_by_device: Dict[str, int]
     counts_by_status: Dict[str, int]
+    # 📝 Nuevo campo añadido para el recuento de eventos de acción
+    counts_by_action_type: Dict[str, int] 
     
     class Config:
         from_attributes = True

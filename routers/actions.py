@@ -1,5 +1,5 @@
 # ===============================================================
-# 📁 endpoints/actions.py
+# 📁 endpoints/actions.py (ACTUALIZADO CON PROTECCIÓN)
 # ===============================================================
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlmodel import select
@@ -15,7 +15,7 @@ from schemas.actions_schema import ActionDeviceCreate, ActionDeviceRead, ActionD
 router = APIRouter(prefix="/actions", tags=["Actions Devices"])
 
 # ===============================================================
-# 📥 POST /actions/ → Crear nueva acción (ACTUALIZADO)
+# 📥 POST /actions/ → Crear nueva acción (PROTEGIDA)
 # ===============================================================
 @router.post("/", response_model=ActionDeviceRead)
 async def create_action(
@@ -41,7 +41,7 @@ async def create_action(
     
     session.add(new_action)
     session.commit()
-    session.refresh(new_action)
+    session.refresh(new_action)  # ✅ Esto obtiene el ID generado
 
     # Enviar al WebSocket
     payload = {
@@ -58,10 +58,11 @@ async def create_action(
     except Exception as e:
         print(f"⚠️ No se pudo enviar al dispositivo {data.id_device}: {e}")
 
-    # Crear log
+    # Crear log CON EL ID DE LA ACCIÓN
     log = Log(
         id_device=data.id_device,
         id_user=user.id,
+        id_action=new_action.id,  # ✅ AGREGAR ESTA LÍNEA
         event=f"Acción '{data.action}' creada para dispositivo {data.id_device}",
         timestamp=datetime.utcnow()
     )
@@ -71,8 +72,10 @@ async def create_action(
     print(f"✅ Acción creada exitosamente: ID {new_action.id}")
     return new_action
 
+# ---------------------------------------------------------------
+
 # ===============================================================
-# 🔄 PUT /actions/{action_id} → Actualizar estado de acción (ACTUALIZADO)
+# 🔄 PUT /actions/{action_id} → Actualizar estado de acción (PROTEGIDA)
 # ===============================================================
 @router.put("/{action_id}", response_model=ActionDeviceRead)
 async def update_action_status(
@@ -97,6 +100,7 @@ async def update_action_status(
     log = Log(
         id_device=action.id_device,
         id_user=user.id,
+        id_action=action.id,  # ✅ AGREGAR ESTA LÍNEA
         event=log_message,
         timestamp=datetime.utcnow(),
     )
@@ -119,13 +123,15 @@ async def update_action_status(
 
     return action
 
+# ---------------------------------------------------------------
+
 # ===============================================================
-# 📜 GET /actions/ → Listar todas las acciones (ACTUALIZADO)
+# 📜 GET /actions/ → Listar todas las acciones (PROTEGIDA)
 # ===============================================================
 @router.get("/", response_model=list[ActionDeviceRead])
 def list_actions(
     session: Session = Depends(get_session),
-    user=Depends(decode_token),
+    user=Depends(decode_token),  # 🔒 Protección añadida
     id_device: int | None = None,
     executed: bool | None = None,
     limit: int = 20,
@@ -141,14 +147,16 @@ def list_actions(
     results = session.exec(query.offset(offset).limit(limit)).all()
     return results
 
+# ---------------------------------------------------------------
+
 # ===============================================================
-# 🔍 GET /actions/{action_id} → Obtener acción por ID
+# 🔍 GET /actions/{action_id} → Obtener acción por ID (PROTEGIDA)
 # ===============================================================
 @router.get("/{action_id}", response_model=ActionDeviceRead)
 def get_action(
     action_id: int,
     session: Session = Depends(get_session),
-    user=Depends(decode_token),
+    user=Depends(decode_token),  # 🔒 Protección añadida
 ):
     """Obtiene una acción específica por su ID."""
     action = session.exec(select(ActionDevice).where(ActionDevice.id == action_id)).first()
@@ -156,14 +164,16 @@ def get_action(
         raise HTTPException(status_code=404, detail="Acción no encontrada")
     return action
 
+# ---------------------------------------------------------------
+
 # ===============================================================
-# 🗑️ DELETE /actions/{action_id} → Eliminar acción
+# 🗑️ DELETE /actions/{action_id} → Eliminar acción (PROTEGIDA)
 # ===============================================================
 @router.delete("/{action_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_action(
     action_id: int,
     session: Session = Depends(get_session),
-    user=Depends(decode_token),
+    user=Depends(decode_token),  # 🔒 Protección añadida
 ):
     """Elimina una acción por su ID."""
     action = session.exec(select(ActionDevice).where(ActionDevice.id == action_id)).first()
@@ -174,8 +184,10 @@ def delete_action(
     session.commit()
     return
 
+# ---------------------------------------------------------------
+
 # ===============================================================
-# 📡 POST /actions/device/confirm/{action_id} → Confirmación desde IoT (ACTUALIZADO)
+# 📡 POST /actions/device/confirm/{action_id} → Confirmación desde IoT
 # ===============================================================
 @router.post("/device/confirm/{action_id}")
 async def confirm_action_execution(
@@ -196,6 +208,7 @@ async def confirm_action_execution(
     log = Log(
         id_device=action.id_device,
         id_user=None,  # El IoT no tiene usuario
+        id_action=action.id,  # ✅ AGREGAR ESTA LÍNEA
         event=f"Dispositivo confirmó ejecución de acción '{action.action}'",
         timestamp=datetime.utcnow(),
     )
@@ -211,7 +224,7 @@ async def confirm_action_execution(
     }
     
     try:
-        await manager.broadcast(payload)  # Enviar a todos los conectados
+        await manager.broadcast(payload)
     except Exception as e:
         print(f"⚠️ Error al broadcast confirmación: {e}")
 
