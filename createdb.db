@@ -1,0 +1,109 @@
+-- ===============================================================
+-- ⚠️ IMPORTANTE: Ejecuta esto en tu base de datos (p.ej., 'iot_control')
+-- ===============================================================
+
+-- ---------------------------------------------------------------
+-- 1. LIMPIEZA: Eliminar tablas si existen
+-- ---------------------------------------------------------------
+SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS tokens;
+DROP TABLE IF EXISTS logs;
+DROP TABLE IF EXISTS actions_devices;
+DROP TABLE IF EXISTS devices;
+DROP TABLE IF EXISTS users;
+SET FOREIGN_KEY_CHECKS = 1;
+
+-- ---------------------------------------------------------------
+-- 2. CREACIÓN DE TABLAS
+-- ---------------------------------------------------------------
+USE db_app_eps32;
+
+-- Tabla users
+CREATE TABLE users (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    status BOOL NOT NULL DEFAULT 1,
+    deleted BOOL NOT NULL DEFAULT 0,
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
+    last_connection DATETIME
+);
+
+-- Tabla devices
+CREATE TABLE devices (
+    id INT NOT NULL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    status VARCHAR(255) NOT NULL DEFAULT 'desconectado',
+    direction VARCHAR(255),
+    created_at DATETIME NOT NULL ,
+    updated_at DATETIME NOT NULL
+);
+
+
+-- Tabla actions_devices
+CREATE TABLE actions_devices (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_device INT NOT NULL,
+    action VARCHAR(100) NOT NULL,
+    executed BOOL NOT NULL DEFAULT 0,
+    created_at DATETIME NOT NULL,
+    FOREIGN KEY (id_device) REFERENCES devices(id)
+);
+
+-- Tabla logs
+CREATE TABLE logs (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    event VARCHAR(255) NOT NULL,
+    id_device INT NOT NULL,
+    id_user INT NOT NULL,
+    id_action INT,
+    timestamp DATETIME NOT NULL,
+    FOREIGN KEY (id_device) REFERENCES devices(id),
+    FOREIGN KEY (id_user) REFERENCES users(id),
+    FOREIGN KEY (id_action) REFERENCES actions_devices(id)
+);
+
+-- Tabla tokens
+CREATE TABLE tokens (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_user INT NOT NULL,
+    token TEXT NOT NULL,
+    status_token BOOL NOT NULL DEFAULT 1,
+    date_token DATETIME NOT NULL,
+    expiration DATETIME NOT NULL,
+    FOREIGN KEY (id_user) REFERENCES users(id)
+);
+
+
+-- ---------------------------------------------------------------
+-- 3. INSERCIÓN DE DATOS DE PRUEBA
+-- ---------------------------------------------------------------
+
+-- Contraseña admin123 hasheada (bcrypt)
+SET @HASHED_PASS = '$2b$12$EjmX48yVf4rF/yZJtqJ3E.FwY8kU1.Vw9R6T2Q6Q6Q6Q6Q6Q6Q6';
+
+INSERT INTO users (name, username, password, email, created_at, updated_at) VALUES
+('Admin Principal', 'admin', @HASHED_PASS, 'admin@iot.com', NOW(), NOW());
+
+-- Insertar dispositivo ESP32 con IP real
+INSERT INTO devices (id, name, status, direction, updated_at) VALUES
+(1, 'ESP32-Controlador', 'activo', '192.168.1.96', NOW());
+
+-- Insertar acciones para el dispositivo
+select *from actions_devices;
+INSERT INTO actions_devices (id_device, action, created_at, executed) VALUES
+(1, 'LED_ON', NOW(), 0),
+(1, 'LED_OFF', NOW(), 0),
+(1, 'MOTOR_IZQ', NOW(), 0),
+(1, 'MOTOR_DER', NOW(), 0),
+(1, 'MOTOR_STOP', NOW(), 0);
+
+-- Insertar un log de prueba
+select *from devices;
+select *from logs;
+select *from actions_devices;
+INSERT INTO logs (event, id_device, id_user, timestamp) VALUES
+('Sistema iniciado', 1, 1, NOW());
