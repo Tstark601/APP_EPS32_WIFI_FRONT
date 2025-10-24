@@ -1,0 +1,790 @@
+REPORTE DE ACCIONES DEL SISTEMA IoT
+==================================================
+
+Generado el: 2025-10-24 14:52:16
+Total de registros: 259
+
+Tipo de evento: Acción 'LED_OFF' creada para dispositivo 1
+
+==================================================
+
+1. [2025-10-24 19:49:05] LED_OFF - Acción 'LED_OFF' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+2. [2025-10-24 19:48:50] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+3. [2025-10-24 19:48:50] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+4. [2025-10-24 19:48:50] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+5. [2025-10-24 19:36:10] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+6. [2025-10-24 19:36:10] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+7. [2025-10-24 19:36:10] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+8. [2025-10-24 19:34:30] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+9. [2025-10-24 19:34:29] LED_OFF - Acción 'LED_OFF' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+10. [2025-10-24 19:34:28] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+11. [2025-10-24 19:34:28] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+12. [2025-10-24 19:34:27] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+13. [2025-10-24 19:34:22] LED_OFF - Acción 'LED_OFF' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+14. [2025-10-24 19:34:11] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+15. [2025-10-24 19:34:11] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+16. [2025-10-24 19:34:11] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+17. [2025-10-24 19:29:56] LED_OFF - Acción 'LED_OFF' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+18. [2025-10-24 19:29:17] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+19. [2025-10-24 19:29:17] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+20. [2025-10-24 19:29:16] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+21. [2025-10-24 19:27:24] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+22. [2025-10-24 19:27:23] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+23. [2025-10-24 19:27:23] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+24. [2025-10-24 19:24:57] LED_OFF - Acción 'LED_OFF' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+25. [2025-10-24 19:24:55] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+26. [2025-10-24 19:24:54] LED_OFF - Acción 'LED_OFF' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+27. [2025-10-24 19:24:53] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+28. [2025-10-24 19:24:47] LED_OFF - Acción 'LED_OFF' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+29. [2025-10-24 19:24:32] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+30. [2025-10-24 19:24:31] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+31. [2025-10-24 19:24:31] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+32. [2025-10-24 19:20:32] LED_OFF - Acción 'LED_OFF' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+33. [2025-10-24 19:20:23] LED_OFF - Acción 'LED_OFF' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+34. [2025-10-24 19:19:39] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+35. [2025-10-24 19:19:39] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+36. [2025-10-24 19:19:38] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+37. [2025-10-24 19:16:55] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+38. [2025-10-24 19:16:42] LED_OFF - Acción 'LED_OFF' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+39. [2025-10-24 19:16:33] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+40. [2025-10-24 19:16:24] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+41. [2025-10-24 19:16:12] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+42. [2025-10-24 19:16:11] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+43. [2025-10-24 19:16:11] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+44. [2025-10-24 19:12:42] LED_OFF - Acción 'LED_OFF' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+45. [2025-10-24 19:12:39] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+46. [2025-10-24 19:12:30] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+47. [2025-10-24 19:12:21] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+48. [2025-10-24 19:12:12] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+49. [2025-10-24 19:11:59] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+50. [2025-10-24 19:11:59] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+51. [2025-10-24 19:11:58] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+52. [2025-10-24 19:10:39] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+53. [2025-10-24 19:10:35] LED_OFF - Acción 'LED_OFF' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+54. [2025-10-24 19:10:28] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+55. [2025-10-24 19:10:24] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+56. [2025-10-24 19:10:21] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+57. [2025-10-24 19:09:25] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+58. [2025-10-24 19:09:20] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+59. [2025-10-24 19:09:20] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+60. [2025-10-24 19:06:20] LED_OFF - Acción 'LED_OFF' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+61. [2025-10-24 19:05:50] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+62. [2025-10-24 19:05:48] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+63. [2025-10-24 19:05:46] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+64. [2025-10-24 19:03:53] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+65. [2025-10-24 19:03:20] LED_OFF - Acción 'LED_OFF' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+66. [2025-10-24 19:02:56] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+67. [2025-10-24 19:02:40] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+68. [2025-10-24 19:02:40] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+69. [2025-10-24 19:02:39] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+70. [2025-10-24 18:32:36] LED_OFF - Acción 'LED_OFF' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+71. [2025-10-24 18:31:52] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+72. [2025-10-24 18:31:52] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+73. [2025-10-24 18:31:52] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+74. [2025-10-24 17:56:13] LED_OFF - Acción 'LED_OFF' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+75. [2025-10-24 17:56:01] MOTOR_STOP - Acción 'MOTOR_STOP' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+76. [2025-10-24 17:55:59] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+77. [2025-10-24 17:55:40] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+78. [2025-10-24 17:55:13] MOTOR_STOP - Acción 'MOTOR_STOP' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+79. [2025-10-24 17:55:09] MOTOR_STOP - Acción 'MOTOR_STOP' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+80. [2025-10-24 17:53:11] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+81. [2025-10-24 17:53:10] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+82. [2025-10-24 17:53:10] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+83. [2025-10-24 17:42:32] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+84. [2025-10-24 17:42:07] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+85. [2025-10-24 17:42:07] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+86. [2025-10-24 17:42:07] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+87. [2025-10-24 17:37:38] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+88. [2025-10-24 17:37:35] LED_OFF - Acción 'LED_OFF' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+89. [2025-10-24 17:37:34] MOTOR_STOP - Acción 'MOTOR_STOP' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+90. [2025-10-24 17:37:32] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+91. [2025-10-24 17:37:30] MOTOR_STOP - Acción 'MOTOR_STOP' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+92. [2025-10-24 17:37:28] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+93. [2025-10-24 17:37:13] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+94. [2025-10-24 17:37:11] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+95. [2025-10-24 17:37:10] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+96. [2025-10-24 17:35:11] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+97. [2025-10-24 17:35:11] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+98. [2025-10-24 17:35:10] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+99. [2025-10-24 17:34:18] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+100. [2025-10-24 17:33:28] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+101. [2025-10-24 17:33:28] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+102. [2025-10-24 17:33:28] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+103. [2025-10-24 17:27:31] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+104. [2025-10-24 17:27:30] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+105. [2025-10-24 17:27:30] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+106. [2025-10-24 17:23:12] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+107. [2025-10-24 17:22:55] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+108. [2025-10-24 17:22:51] LED_OFF - Acción 'LED_OFF' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+109. [2025-10-24 17:22:42] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+110. [2025-10-24 17:22:35] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+111. [2025-10-24 17:21:32] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+112. [2025-10-24 17:21:31] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+113. [2025-10-24 17:21:31] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+114. [2025-10-24 17:17:21] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+115. [2025-10-24 17:17:20] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+116. [2025-10-24 17:17:20] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+117. [2025-10-24 17:08:44] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+118. [2025-10-24 17:08:41] LED_OFF - Acción 'LED_OFF' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+119. [2025-10-24 17:07:30] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+120. [2025-10-24 17:07:26] MOTOR_STOP - Acción 'MOTOR_STOP' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+121. [2025-10-24 17:07:24] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+122. [2025-10-24 17:07:13] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+123. [2025-10-24 17:07:09] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+124. [2025-10-24 17:07:06] LED_OFF - Acción 'LED_OFF' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+125. [2025-10-24 17:07:00] LED_OFF - Acción 'LED_OFF' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+126. [2025-10-24 17:06:25] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+127. [2025-10-24 16:03:02] LED_OFF - Acción 'LED_OFF' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+128. [2025-10-24 16:02:57] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+129. [2025-10-24 16:02:54] LED_OFF - Acción 'LED_OFF' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+130. [2025-10-24 16:02:36] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+131. [2025-10-24 14:47:58] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+132. [2025-10-24 14:47:55] LED_OFF - Acción 'LED_OFF' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+133. [2025-10-24 14:47:44] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+134. [2025-10-24 14:47:35] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+135. [2025-10-24 14:47:26] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+136. [2025-10-24 14:46:41] MOTOR_DER - Acción 'MOTOR_DER' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+137. [2025-10-24 14:46:39] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+138. [2025-10-24 14:46:36] LED_OFF - Acción 'LED_OFF' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+139. [2025-10-24 14:46:23] LED_ON - Acción 'LED_ON' creada para dispositivo 1
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+140. [2025-10-24 14:31:14] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+141. [2025-10-24 14:31:01] LED_ON - Acción 'LED_ON' creada
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+142. [2025-10-24 13:48:52] LED_ON - Acción 'LED_ON' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+143. [2025-10-24 13:48:50] LED_OFF - Acción 'LED_OFF' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+144. [2025-10-24 13:48:37] LED_OFF - Acción 'LED_OFF' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+145. [2025-10-24 13:48:29] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+146. [2025-10-24 13:48:26] MOTOR_STOP - Acción 'MOTOR_STOP' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+147. [2025-10-24 13:48:23] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+148. [2025-10-24 13:48:11] LED_ON - Acción 'LED_ON' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+149. [2025-10-24 13:37:20] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+150. [2025-10-24 13:37:19] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+151. [2025-10-24 13:37:18] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+152. [2025-10-24 13:37:18] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+153. [2025-10-24 13:37:18] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+154. [2025-10-24 13:37:16] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+155. [2025-10-24 13:37:15] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+156. [2025-10-24 13:37:15] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+157. [2025-10-24 13:37:14] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+158. [2025-10-24 13:37:13] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+159. [2025-10-24 13:37:12] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+160. [2025-10-24 13:37:12] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+161. [2025-10-24 13:37:11] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+162. [2025-10-24 13:37:11] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+163. [2025-10-24 13:37:11] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+164. [2025-10-24 13:37:10] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+165. [2025-10-24 13:37:10] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+166. [2025-10-24 13:37:10] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+167. [2025-10-24 13:37:10] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+168. [2025-10-24 13:37:09] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+169. [2025-10-24 13:37:09] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+170. [2025-10-24 13:37:09] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+171. [2025-10-24 13:37:09] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+172. [2025-10-24 13:37:08] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+173. [2025-10-24 13:37:08] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+174. [2025-10-24 13:37:08] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+175. [2025-10-24 13:37:08] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+176. [2025-10-24 13:37:08] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+177. [2025-10-24 13:37:07] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+178. [2025-10-24 13:37:07] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+179. [2025-10-24 13:37:06] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+180. [2025-10-24 13:37:06] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+181. [2025-10-24 13:37:06] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+182. [2025-10-24 13:37:06] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+183. [2025-10-24 13:37:05] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+184. [2025-10-24 13:37:05] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+185. [2025-10-24 13:37:05] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+186. [2025-10-24 13:37:05] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+187. [2025-10-24 13:37:04] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+188. [2025-10-24 13:37:03] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+189. [2025-10-24 13:37:03] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+190. [2025-10-24 13:37:02] LED_ON - Acción 'LED_ON' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+191. [2025-10-24 00:07:53] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+192. [2025-10-24 00:07:52] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+193. [2025-10-24 00:07:52] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+194. [2025-10-24 00:07:52] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+195. [2025-10-24 00:07:52] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+196. [2025-10-24 00:07:51] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+197. [2025-10-24 00:07:51] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+198. [2025-10-24 00:07:51] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+199. [2025-10-24 00:07:50] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+200. [2025-10-24 00:07:50] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+201. [2025-10-24 00:07:49] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+202. [2025-10-24 00:07:48] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+203. [2025-10-24 00:07:48] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+204. [2025-10-24 00:07:48] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+205. [2025-10-24 00:07:48] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+206. [2025-10-24 00:07:47] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+207. [2025-10-24 00:07:47] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+208. [2025-10-24 00:07:47] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+209. [2025-10-24 00:07:47] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+210. [2025-10-24 00:07:46] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+211. [2025-10-24 00:07:45] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+212. [2025-10-24 00:07:44] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+213. [2025-10-24 00:07:43] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+214. [2025-10-24 00:07:37] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+215. [2025-10-24 00:07:36] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+216. [2025-10-24 00:07:36] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+217. [2025-10-24 00:07:36] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+218. [2025-10-24 00:07:36] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+219. [2025-10-24 00:07:36] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+220. [2025-10-24 00:07:35] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+221. [2025-10-24 00:07:35] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+222. [2025-10-24 00:07:35] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+223. [2025-10-24 00:07:34] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+224. [2025-10-24 00:07:34] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+225. [2025-10-24 00:07:34] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+226. [2025-10-24 00:07:34] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+227. [2025-10-24 00:07:33] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+228. [2025-10-24 00:07:32] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+229. [2025-10-24 00:07:31] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+230. [2025-10-24 00:07:31] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+231. [2025-10-24 00:07:31] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+232. [2025-10-24 00:07:30] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+233. [2025-10-24 00:07:30] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+234. [2025-10-24 00:07:30] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+235. [2025-10-24 00:07:30] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+236. [2025-10-24 00:07:30] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+237. [2025-10-24 00:07:29] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+238. [2025-10-24 00:07:29] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+239. [2025-10-24 00:07:27] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+240. [2025-10-24 00:07:26] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+241. [2025-10-24 00:07:26] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+242. [2025-10-24 00:07:26] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+243. [2025-10-24 00:07:25] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+244. [2025-10-24 00:07:25] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+245. [2025-10-24 00:07:25] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+246. [2025-10-24 00:07:24] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+247. [2025-10-24 00:07:22] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+248. [2025-10-24 00:07:21] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+249. [2025-10-24 00:07:21] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+250. [2025-10-24 00:07:20] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+251. [2025-10-24 00:07:19] LED_ON - Acción 'LED_ON' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+252. [2025-10-24 00:07:19] MOTOR_IZQ - Acción 'MOTOR_IZQ' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+253. [2025-10-24 00:03:06] MOTOR_STOP - Acción 'MOTOR_STOP' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+254. [2025-10-24 00:02:56] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+255. [2025-10-24 00:02:55] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+256. [2025-10-24 00:02:54] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+257. [2025-10-24 00:02:53] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+258. [2025-10-24 00:02:52] MOTOR_DER - Acción 'MOTOR_DER' creada
+    Usuario: 12345 | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+259. [2025-10-23 13:15:24] N/A - Sistema iniciado
+    Usuario: jeacosta | Dispositivo: ESP32-Controlador
+--------------------------------------------------------------------------------
+
+--- FIN DEL REPORTE ---
+Total de registros exportados: 259
