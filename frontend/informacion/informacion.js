@@ -1,37 +1,58 @@
-// informacion.js
+// informacion.js - Página de información del proyecto
+import { requireAuth } from '../auth/auth.js';
 
-// Importar la instancia de Axios si fuera necesario para una futura funcionalidad
-// import api from '../api/api.js'; 
+// =========================================================
+// PROTECCIÓN DE RUTA
+// =========================================================
+if (!requireAuth()) {
+    throw new Error('Acceso no autorizado');
+}
 
-// ----------------------------------------------------------------
+// =========================================================
 // FUNCIONES ESPECÍFICAS DE LA VISTA
-// ----------------------------------------------------------------
+// =========================================================
 
 /**
  * Función principal que se ejecuta al cargar el contenido de la página.
- * Si hubiera datos dinámicos a cargar (ej. datos de un endpoint /developers), 
- * se harían aquí.
  */
 function initInformacionPage() {
-    console.log("Módulo de Información cargado y listo.");
+    console.log('ℹ️ Módulo de Información cargado y listo.');
     
-    // Ejemplo de funcionalidad si tuvieras que cargar la info de los developers dinámicamente:
-    // fetchDeveloperInfo(); 
+    // Aquí podrías cargar información dinámica si fuera necesario
+    // Por ejemplo, información de desarrolladores desde una API
+    // fetchDeveloperInfo();
 }
 
-// ----------------------------------------------------------------
-// INICIALIZACIÓN
-// ----------------------------------------------------------------
+/**
+ * Animación de entrada para las tarjetas (opcional)
+ */
+function animateCards() {
+    const cards = document.querySelectorAll('.bg-white');
+    cards.forEach((card, index) => {
+        setTimeout(() => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.5s ease';
+            
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 50);
+        }, index * 100);
+    });
+}
 
+// =========================================================
+// INICIALIZACIÓN
+// =========================================================
 document.addEventListener('DOMContentLoaded', () => {
-    // Nota: El archivo components.js ya se encarga de renderizar el Sidebar y Topbar
-    // y de inicializar el Modal de Logout.
-    
     // Inicializamos la lógica de esta página
     initInformacionPage();
+    
+    // Animación opcional de entrada
+    animateCards();
 
-    // Re-creamos los iconos de Lucide que se hayan añadido en el HTML
-    // (Esto es necesario porque la vista es renderizada antes que components.js)
+    // Re-creamos los iconos de Lucide
     if (typeof lucide !== 'undefined' && lucide.createIcons) {
         lucide.createIcons();
     }
