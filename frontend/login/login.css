@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+/* Base del patrón (se reutiliza en ambas esquinas) */
+/* ... (Mantenemos tu código CSS original aquí) ... */
+.grid-base {
+    /* ... */
+}
+/* Para la esquina izquierda */
+.grid-left {
+    /* ... */
+}
+/* Para la esquina derecha */
+.grid-right {
+    /* ... */
+}
+/* Difuminado superior derecha */
+.mask-gradient-tr {
+    /* ... */
+}
+/* Difuminado inferior izquierda */
+.mask-gradient-bl {
+    /* ... */
+}

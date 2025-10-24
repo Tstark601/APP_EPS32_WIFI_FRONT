@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Control Nocturno</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#4F46E5', 
+                        'sidebar-bg': '#F9FAFB',
+                        'motor-blue': '#6366F1', // Indigo-500 para gráficos de motor
+                        'led-yellow': '#FBBF24', // Amber-400 para gráficos de LED
+                        'gray-dark': '#1F2937', // Para el fondo del gráfico de barras
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+    
+    <div id="sidebar"></div>
+    <main class="ml-0 lg:ml-64 transition-all duration-300"> 
+        <div id="topbar"></div>
+        
+        <div id="logoutModal" class="fixed inset-0 bg-black bg-opacity-50 hidden transition-opacity opacity-0 z-50 flex items-center justify-center">
+            <div class="bg-white rounded-lg p-6 shadow-xl w-full max-w-sm transform transition-all scale-95 opacity-0">
+                <h3 class="text-lg font-bold text-gray-900 mb-2">Confirmar Cierre de Sesión</h3>
+                <p class="text-sm text-gray-500 mb-4">¿Estás seguro de que quieres cerrar tu sesión?</p>
+                <div class="flex justify-end space-x-3">
+                    <button id="cancelLogout" type="button" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
+                        Cancelar
+                    </button>
+                    <button id="confirmLogout" type="button" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
+                        Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-6">
+            <h1 class="text-2xl font-semibold text-gray-900 mb-6">Dashboard</h1>
+
+            <div class="grid grid-cols-2 lg:grid-cols-6 gap-6 mb-8" id="metrics-container">
+                
+                <div class="col-span-2 lg:col-span-1 bg-white p-4 rounded-xl shadow-lg flex items-center space-x-3 border-l-4 border-green-500">
+                    <svg data-lucide="zap" class="w-6 h-6 text-green-500"></svg>
+                    <div>
+                        <p class="text-xs text-gray-500 font-medium">Activo</p>
+                        <p class="text-lg font-bold text-gray-900" id="metric-status">ON</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl shadow-lg flex items-center space-x-3">
+                    <svg data-lucide="sun" class="w-6 h-6 text-yellow-500"></svg>
+                    <div>
+                        <p class="text-xs text-gray-500 font-medium">Total Encendidos LED</p>
+                        <p class="text-lg font-bold text-gray-900" id="metric-led-total">728</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl shadow-lg flex items-center space-x-3">
+                    <svg data-lucide="gauge" class="w-6 h-6 text-indigo-500"></svg>
+                    <div>
+                        <p class="text-xs text-gray-500 font-medium">Total de movimientos general</p>
+                        <p class="text-lg font-bold text-gray-900" id="metric-movements">64 / 70</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-4 rounded-xl shadow-lg flex items-center space-x-3">
+                    <svg data-lucide="arrow-right-circle" class="w-6 h-6 text-blue-500"></svg>
+                    <div>
+                        <p class="text-xs text-gray-500 font-medium">Total de giros a la derecha</p>
+                        <p class="text-lg font-bold text-gray-900" id="metric-right-turns">728</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl shadow-lg flex items-center space-x-3">
+                    <svg data-lucide="arrow-left-circle" class="w-6 h-6 text-blue-500"></svg>
+                    <div>
+                        <p class="text-xs text-gray-500 font-medium">Total de giros a la izquierda</p>
+                        <p class="text-lg font-bold text-gray-900" id="metric-left-turns">728</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-xl shadow-lg flex items-center space-x-3">
+                    <svg data-lucide="shield-off" class="w-6 h-6 text-red-500"></svg>
+                    <div>
+                        <p class="text-xs text-gray-500 font-medium">Total de giros detenidos</p>
+                        <p class="text-lg font-bold text-gray-900" id="metric-stops">64</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                
+                <div class="lg:col-span-1 bg-white p-6 rounded-xl shadow-lg">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-semibold text-gray-800">Eventos por Dispositivo</h2>
+                        <span class="text-sm text-gray-500">Total: <span id="chart1-total">123455</span></span>
+                    </div>
+                    <div class="h-64">
+                        <canvas id="eventsByDeviceChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-lg">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Registro por usuario</h2>
+                    <div id="registrationByUserList">
+                        </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Dirección del Motor</h2>
+                    <div class="flex flex-col lg:flex-row items-center justify-between">
+                        <div class="w-full lg:w-1/2 h-64">
+                            <canvas id="motorDirectionChart"></canvas>
+                        </div>
+                        <div id="motorDirectionLegend" class="w-full lg:w-1/2 mt-4 lg:mt-0 lg:pl-6 space-y-2">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Led Encendidos</h2>
+                    <div class="flex flex-col lg:flex-row items-center justify-between">
+                        <div class="w-full lg:w-1/2 h-64">
+                            <canvas id="ledsOnChart"></canvas>
+                        </div>
+                        <div id="ledsOnLegend" class="w-full lg:w-1/2 mt-4 lg:mt-0 lg:pl-6 space-y-2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-xl font-semibold text-gray-800 mb-6">Uso de Led Por Horas</h2>
+                <div class="h-96">
+                    <canvas id="ledUsageByHourChart"></canvas>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script type="module" src="../components/components.js"></script>
+    <script type="module" src="./dashboard.js"></script>
+</body>
+</html>

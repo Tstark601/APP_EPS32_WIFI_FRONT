@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - Control Nocturno</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#4F46E5', // Indigo-600
+                        'dark-bg': '#101423',      // Fondo oscuro
+                        'form-bg': '#1F2937',      // Fondo de tarjeta (Gray-800)
+                        'accent-blue': '#6366F1',  // Azul de los botones
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: theme('colors.dark-bg');
+            background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px), 
+                              linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center p-4">
+    
+    <main class="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-2 shadow-2xl rounded-xl overflow-hidden">
+        
+        <div class="bg-dark-bg p-8 md:p-16 text-white flex flex-col justify-center">
+            
+            <a href="#" class="mb-8 text-sm text-gray-400 hover:text-primary-blue transition hidden lg:inline-flex items-center">
+                <svg data-lucide="chevron-left" class="w-4 h-4 mr-1"></svg>
+                Back to Dashboard
+            </a>
+
+            <div class="space-y-2 mb-8">
+                <h1 class="text-4xl font-extrabold text-white">Iniciar Sesión</h1>
+                <p class="text-gray-400">Ingresa tu usuario y contraseña para iniciar sesión!</p>
+            </div>
+            
+            <form id="loginForm" class="space-y-6">
+                
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-300 mb-2">Usuario*</label>
+                    <input type="text" id="username" placeholder="Ingresa tu usuario" required
+                        class="w-full px-4 py-3 bg-form-bg border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-accent-blue focus:border-accent-blue transition" />
+                </div>
+                
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-300 mb-2">Contraseña*</label>
+                    <input type="password" id="password" placeholder="clave1234" required
+                        class="w-full px-4 py-3 bg-form-bg border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-accent-blue focus:border-accent-blue transition" />
+                </div>
+
+            <button type="submit" onclick="login()"
+                class="w-full rounded-md bg-[#667EEA] py-3 text-white font-semibold text-lg hover:bg-indigo-500 transition mt-8">
+                Iniciar Sesión
+                </button>
+                </form>
+                
+                <div class="mt-4 text-center">
+                    <a href="./register.html" class="text-sm font-medium text-blue-400 hover:text-blue-300 transition">
+                        ¿No tienes cuenta? Regístrate aquí
+                    </a>
+                </div>
+                </div>
+
+                <div id="errorMessage" class="hidden text-center text-red-400 text-sm pt-2">
+                    Usuario o contraseña incorrectos.
+                </div>
+            </form>
+            
+        </div>
+        
+        <div class="bg-gray-800 p-8 md:p-16 flex flex-col justify-center items-center text-center">
+            <div class="max-w-xs mb-10">
+                <img src="./assets/logo_cul.png" alt="Logotipo CUL" class="w-full h-auto mx-auto" id="cul-logo-placeholder">
+            </div>
+            
+            <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4 leading-snug">
+                Sistema de control Nocturno
+            </h2>
+            <p class="text-3xl font-light text-gray-300">
+                2025
+            </p>
+        </div>
+        
+    </main>
+
+    <script type="module" src="./login.js"></script>
+    <script>
+        // Inicializar iconos de Lucide
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof lucide !== 'undefined' && lucide.createIcons) {
+                lucide.createIcons();
+            }
+            // NOTA: Reemplazar ./assets/logo_cul.png con la imagen real de la CUL y 60 Años
+        });
+    </script>
+</body>
+</html>

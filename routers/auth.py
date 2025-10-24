@@ -46,6 +46,7 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends(), session: Sessi
     """
     Autentica al usuario y genera un token JWT.
     """
+    print(form_data.username)
     # Buscar usuario
     user = session.exec(select(User).where(User.username == form_data.username)).first()
     if not user:
