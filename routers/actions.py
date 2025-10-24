@@ -1,12 +1,12 @@
 # ===============================================================
-# 📁 endpoints/actions_devices.py
+# 📁 endpoints/actions.py
 # ===============================================================
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlmodel import select
 from datetime import datetime
-from core.database import Session,get_session
+from core.database import Session, get_session
 from core.security import decode_token
-from core.websocket_manager import websocket_manager as manager
+from core.websocket_manager import manager
 from models.actions_devices import ActionDevice
 from models.devices import Device
 from models.logs import Log
@@ -15,7 +15,7 @@ from schemas.actions_schema import ActionDeviceCreate, ActionDeviceRead, ActionD
 router = APIRouter(prefix="/actions", tags=["Actions Devices"])
 
 # ===============================================================
-# 📥 POST /actions/ → Crear nueva acción
+# 📥 POST /actions/ → Crear nueva acción (ACTUALIZADO)
 # ===============================================================
 @router.post("/", response_model=ActionDeviceRead)
 async def create_action(
@@ -24,47 +24,55 @@ async def create_action(
     user=Depends(decode_token),
 ):
     """Crea una acción para un dispositivo específico."""
+    print(f"📥 Datos recibidos: {data.dict()}")  # Debug
+    
     # Validar dispositivo existente
-    device = session.exec(select(Device).where(Device.id == data.device_id)).first()
+    device = session.exec(select(Device).where(Device.id == data.id_device)).first()
     if not device:
         raise HTTPException(status_code=404, detail="Dispositivo no encontrado")
 
     # Crear nueva acción
     new_action = ActionDevice(
-        device_id=data.device_id,
-        action_type=data.action_type,
+        id_device=data.id_device,
+        action=data.action,
         executed=False,
         created_at=datetime.utcnow(),
     )
+    
     session.add(new_action)
     session.commit()
     session.refresh(new_action)
 
     # Enviar al WebSocket
     payload = {
-        "event": "new_action",
+        "type": "action_execute",
         "action_id": new_action.id,
-        "device_id": new_action.device_id,
-        "action_type": new_action.action_type,
+        "id_device": new_action.id_device,
+        "action_type": new_action.action,
         "timestamp": new_action.created_at.isoformat(),
     }
-    await manager.broadcast(new_action.device_id, payload)
+    
+    try:
+        await manager.send_to_device(data.id_device, payload)
+        print(f"✅ Acción enviada por WebSocket al dispositivo {data.id_device}")
+    except Exception as e:
+        print(f"⚠️ No se pudo enviar al dispositivo {data.id_device}: {e}")
 
     # Crear log
     log = Log(
-        device_id=data.device_id,
-        action_type=data.action_type,
-        status="pendiente",
-        message=f"Acción '{data.action_type}' enviada al dispositivo '{device.name}'",
-        created_at=datetime.utcnow(),
+        id_device=data.id_device,
+        id_user=user.id,
+        event=f"Acción '{data.action}' creada para dispositivo {data.id_device}",
+        timestamp=datetime.utcnow()
     )
     session.add(log)
     session.commit()
 
+    print(f"✅ Acción creada exitosamente: ID {new_action.id}")
     return new_action
 
 # ===============================================================
-# 🔄 PUT /actions/{action_id} → Actualizar estado de acción
+# 🔄 PUT /actions/{action_id} → Actualizar estado de acción (ACTUALIZADO)
 # ===============================================================
 @router.put("/{action_id}", response_model=ActionDeviceRead)
 async def update_action_status(
@@ -73,24 +81,24 @@ async def update_action_status(
     session: Session = Depends(get_session),
     user=Depends(decode_token),
 ):
-    """Actualiza el estado (ejecutada o revertida) de una acción."""
+    """Actualiza el estado (ejecutada) de una acción."""
     action = session.exec(select(ActionDevice).where(ActionDevice.id == action_id)).first()
     if not action:
         raise HTTPException(status_code=404, detail="Acción no encontrada")
 
-    action.executed = update.executed
-    action.updated_at = datetime.utcnow()
+    # Actualizar solo si se proporciona el campo executed
+    if update.executed is not None:
+        action.executed = update.executed
+
     session.add(action)
 
-    log_message = "Acción ejecutada correctamente" if update.executed else "Acción revertida"
-    log_status = "ejecutada" if update.executed else "cancelada"
+    log_message = "Acción ejecutada correctamente" if action.executed else "Acción marcada como no ejecutada"
 
     log = Log(
-        device_id=action.device_id,
-        action_type=action.action_type,
-        status=log_status,
-        message=log_message,
-        created_at=datetime.utcnow(),
+        id_device=action.id_device,
+        id_user=user.id,
+        event=log_message,
+        timestamp=datetime.utcnow(),
     )
     session.add(log)
     session.commit()
@@ -98,31 +106,35 @@ async def update_action_status(
 
     # Notificar por WebSocket
     payload = {
-        "event": "update_action",
+        "event": "action_updated",
         "action_id": action.id,
-        "device_id": action.device_id,
-        "status": log_status,
+        "id_device": action.id_device,
+        "status": "executed" if action.executed else "pending",
     }
-    await manager.broadcast(action.device_id, payload)
+    
+    try:
+        await manager.send_to_device(action.id_device, payload)
+    except Exception as e:
+        print(f"⚠️ No se pudo notificar actualización al dispositivo: {e}")
 
     return action
 
 # ===============================================================
-# 📜 GET /actions/ → Listar todas las acciones
+# 📜 GET /actions/ → Listar todas las acciones (ACTUALIZADO)
 # ===============================================================
 @router.get("/", response_model=list[ActionDeviceRead])
 def list_actions(
     session: Session = Depends(get_session),
     user=Depends(decode_token),
-    device_id: int | None = None,
+    id_device: int | None = None,
     executed: bool | None = None,
     limit: int = 20,
     offset: int = 0,
 ):
     """Obtiene todas las acciones con filtros opcionales."""
     query = select(ActionDevice)
-    if device_id:
-        query = query.where(ActionDevice.device_id == device_id)
+    if id_device:
+        query = query.where(ActionDevice.id_device == id_device)
     if executed is not None:
         query = query.where(ActionDevice.executed == executed)
 
@@ -160,10 +172,10 @@ def delete_action(
 
     session.delete(action)
     session.commit()
-    return {"message": "Acción eliminada correctamente"}
+    return
 
 # ===============================================================
-# 📡 POST /actions/device/confirm/{action_id} → Confirmación desde IoT
+# 📡 POST /actions/device/confirm/{action_id} → Confirmación desde IoT (ACTUALIZADO)
 # ===============================================================
 @router.post("/device/confirm/{action_id}")
 async def confirm_action_execution(
@@ -179,26 +191,28 @@ async def confirm_action_execution(
         raise HTTPException(status_code=404, detail="Acción no encontrada")
 
     action.executed = True
-    action.updated_at = datetime.utcnow()
     session.add(action)
 
     log = Log(
-        device_id=action.device_id,
-        action_type=action.action_type,
-        status="ejecutada",
-        message=f"El dispositivo confirmó la acción '{action.action_type}' (ID {action.id})",
-        created_at=datetime.utcnow(),
+        id_device=action.id_device,
+        id_user=None,  # El IoT no tiene usuario
+        event=f"Dispositivo confirmó ejecución de acción '{action.action}'",
+        timestamp=datetime.utcnow(),
     )
     session.add(log)
     session.commit()
 
     payload = {
-        "event": "confirm_action",
+        "event": "action_confirmed",
         "action_id": action.id,
-        "device_id": action.device_id,
-        "action_type": action.action_type,
-        "status": "ejecutada",
+        "id_device": action.id_device,
+        "action_type": action.action,
+        "status": "executed",
     }
-    await manager.broadcast(action.device_id, payload)
+    
+    try:
+        await manager.broadcast(payload)  # Enviar a todos los conectados
+    except Exception as e:
+        print(f"⚠️ Error al broadcast confirmación: {e}")
 
     return {"message": "Acción confirmada por el dispositivo", "action_id": action.id}

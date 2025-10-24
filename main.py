@@ -2,8 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 # Importar routers
-from routers import auth, users, devices, actions, logs, reports
-from core.websocket_manager import router as ws_router
+from routers import auth, users, devices, actions, logs, reports, health,ws_device
 
 from core.database import create_db_and_tables 
 
@@ -46,9 +45,12 @@ app.include_router(devices.router)
 app.include_router(actions.router)
 app.include_router(logs.router)
 app.include_router(reports.router)
-app.include_router(ws_router)
+app.include_router(health.router)
+app.include_router(ws_device.router)
 
 # Ruta raíz
 @app.get("/")
 def root():
     return {"message": "Bienvenido al sistema IoT con FastAPI 🚀"}
+
+

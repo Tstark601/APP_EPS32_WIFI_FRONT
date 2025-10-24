@@ -1,0 +1,610 @@
+#include <WiFi.h>
+#include <WebSocketsClient.h>
+#include <ArduinoJson.h>
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+#include <Keypad.h>
+#include <HTTPClient.h>
+
+// ================= CONFIG =================
+const char *ssid = "FMLA ACOSTA_EXT";
+const char *password = "Acost@333";
+
+const char* API_HOST = "192.168.1.120";   // <- backend IP
+const uint16_t API_PORT = 8000;
+const String API_BASE = String("http://") + API_HOST + ":" + String(API_PORT);
+const String WS_PATH = "/ws/device/1";
+
+WebSocketsClient webSocket;
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+// ================= TECLADO =================
+const byte rowsCount = 4;
+const byte columsCount = 4;
+char keys[rowsCount][columsCount] = {
+  {'1','2','3','A'},
+  {'4','5','6','B'},
+  {'7','8','9','C'},
+  {'*','0','#','D'}
+};
+byte rowPins[rowsCount] = {5, 18, 19, 21};
+byte columnPins[columsCount] = {3, 1, 22, 23};
+Keypad keypad = Keypad(makeKeymap(keys), rowPins, columnPins, rowsCount, columsCount);
+
+// ================= PINS =================
+int ledPin1 = 25;
+int ledPin3 = 33;
+int ledPin4 = 32;
+int ledPin5 = 23;
+
+int buttonPin1 = 34;
+int buttonPin3_izquierda = 15;
+int buttonPin4_derecha = 2;
+
+// ================= MOTOR =================
+#define IN1 13
+#define IN2 12
+#define IN3 14
+#define IN4 27
+const int pasoSecuencia[8][4] = {
+  {1,0,0,0},{1,1,0,0},{0,1,0,0},{0,1,1,0},
+  {0,0,1,0},{0,0,1,1},{0,0,0,1},{1,0,0,1}
+};
+int pasoActual = 0;
+bool motorGirando = false;
+bool direccionMotor = true;
+int pasosPorVuelta = 4096;
+int pasosRestantes = 0;
+int porcentajeActual = 0;
+int retardoMotor = 1;
+
+// ================= VARS =================
+unsigned long previousMotorTime = 0;
+unsigned long previousDebounceTime = 0;
+const unsigned long debounceDelay = 50;
+int buttonOld1 = HIGH, buttonOld3 = HIGH, buttonOld4 = HIGH;
+int menuNivel = 0; // 0=principal,1=LED,2=MOTOR
+bool logeado = false;
+String userName = "";
+String tokenActual = "";  // token en memoria
+bool loginManualActivo = false;
+
+// =============== PROTOTIPOS =================
+void mostrarMenuLogin();
+bool verificarConexionBackend();
+void mostrarMenuPrincipal();
+void mostrarMenuLED();
+void mostrarMenuMotor();
+void procesarTeclado(char key);
+void procesarLoginManual(char key);
+bool loginESP32(String username, String password);
+void enviarAccionBackend(String tipoAccion);
+void confirmarAccion(int action_id);
+void toggleLed();
+void iniciarGiroMotor(bool dir);
+void pararMotor();
+void ejecutarPaso(bool dir);
+void actualizarPorcentaje();
+String getNameFromJWT(const String &jwt);
+void delayWithWebSocket(unsigned long ms);
+void webSocketEvent(WStype_t type, uint8_t * payload, size_t length);
+
+// ================= SETUP =================
+void setup() {
+  Serial.begin(115200);
+  Wire.begin(26, 4);
+  lcd.init();
+  lcd.backlight();
+
+  pinMode(ledPin1, OUTPUT);
+  pinMode(ledPin3, OUTPUT);
+  pinMode(ledPin4, OUTPUT);
+  pinMode(ledPin5, OUTPUT);
+  pinMode(buttonPin1, INPUT_PULLUP);
+  pinMode(buttonPin3_izquierda, INPUT_PULLUP);
+  pinMode(buttonPin4_derecha, INPUT_PULLUP);
+  pinMode(IN1, OUTPUT); pinMode(IN2, OUTPUT); pinMode(IN3, OUTPUT); pinMode(IN4, OUTPUT);
+
+  digitalWrite(ledPin1, LOW);
+  digitalWrite(ledPin3, LOW);
+  digitalWrite(ledPin4, HIGH); // idle indicator
+  digitalWrite(ledPin5, LOW);
+
+  // ================= WIFI =================
+  lcd.setCursor(0,0); lcd.print("Conectando WiFi");
+  WiFi.begin(ssid, password);
+
+  unsigned long startAttempt = millis();
+  const unsigned long wifiTimeout = 15000;
+  while (WiFi.status() != WL_CONNECTED) {
+    if (millis() - startAttempt >= wifiTimeout) {
+      lcd.clear(); lcd.print("WIFI NO CONECTADO");
+      Serial.println("[ERROR] WiFi no conectado");
+      while (true) { delay(1000); } // detener por seguridad
+    }
+    delay(500);
+    lcd.print(".");
+  }
+  lcd.clear(); lcd.print("WiFi OK");
+  lcd.setCursor(0,1); lcd.print(WiFi.localIP());
+  Serial.println("WiFi conectado: " + WiFi.localIP().toString());
+  delayWithWebSocket(800);
+
+  // ================= BACKEND HEALTH =================
+  lcd.clear(); lcd.print("Verificando API...");
+  bool apiOk = verificarConexionBackend();
+  if (apiOk) {
+    lcd.clear(); lcd.print("SISTEMA CONECTADO");
+    lcd.setCursor(0,1); lcd.print("CON API");
+    Serial.println("[OK] SISTEMA CONECTADO CON API");
+  } else {
+    lcd.clear(); lcd.print("SISTEMA NO CONECT");
+    lcd.setCursor(0,1); lcd.print("ADO CON API");
+    Serial.println("[WARN] SISTEMA NO CONECTADO CON API");
+    // No bloqueamos: permitimos seguir y aceptar login vía WS.
+  }
+  delayWithWebSocket(800);
+
+  // ================= WEBSOCKET =================
+  String wsUrl = String("ws://") + API_HOST + ":" + String(API_PORT) + WS_PATH;
+  // usar begin(host, port, path)
+  webSocket.begin(API_HOST, API_PORT, WS_PATH.c_str());
+  webSocket.onEvent(webSocketEvent);
+  webSocket.setReconnectInterval(5000); // reconectar cada 5s
+
+  // ================= MENU LOGIN =================
+  mostrarMenuLogin();
+}
+
+// ================= LOOP =================
+void loop() {
+  // mantener ws escuchando
+  webSocket.loop();
+
+  unsigned long currentTime = millis();
+
+  // Si login manual activo, procesamos teclado matricial para ingresar credenciales
+  if (loginManualActivo) {
+    char k = keypad.getKey();
+    if (k) procesarLoginManual(k);
+  }
+
+  // Si logeado, procesamos botones y motor y teclado para menú
+  if (logeado) {
+    // botones físicos (no bloqueantes)
+    if (currentTime - previousDebounceTime >= debounceDelay) {
+      previousDebounceTime = currentTime;
+      int buttonNew1 = digitalRead(buttonPin1);
+      int buttonNew3 = digitalRead(buttonPin3_izquierda);
+      int buttonNew4 = digitalRead(buttonPin4_derecha);
+
+      if (buttonNew1 == LOW && buttonOld1 == HIGH) toggleLed();
+      if (buttonNew3 == LOW && buttonOld3 == HIGH) iniciarGiroMotor(false);
+      if (buttonNew4 == LOW && buttonOld4 == HIGH) iniciarGiroMotor(true);
+
+      buttonOld1 = buttonNew1;
+      buttonOld3 = buttonNew3;
+      buttonOld4 = buttonNew4;
+    }
+
+    // motor paso a paso
+    if (motorGirando && currentTime - previousMotorTime >= retardoMotor) {
+      previousMotorTime = currentTime;
+      ejecutarPaso(direccionMotor);
+      pasosRestantes--;
+      int nuevoPorc = 100 - (pasosRestantes * 100 / pasosPorVuelta);
+      if (nuevoPorc >= porcentajeActual + 5 || pasosRestantes <= 0) {
+        porcentajeActual = nuevoPorc;
+        actualizarPorcentaje();
+      }
+      if (pasosRestantes <= 0) {
+        pararMotor();
+      }
+    }
+
+    // teclado para menú y opciones (no bloqueante)
+    char key = keypad.getKey();
+    if (key) procesarTeclado(key);
+  } else {
+    // No logeado: permitir que, si no está en modo manual, el usuario presione '1' para activar login manual.
+    char key = keypad.getKey();
+    if (!loginManualActivo && key == '1') {
+      loginManualActivo = true;
+      procesarLoginManual('1'); // arranca el ingreso
+    }
+  }
+
+  delay(10);
+}
+
+// ================= FUNCTIONS =================
+
+void delayWithWebSocket(unsigned long ms) {
+  unsigned long start = millis();
+  while (millis() - start < ms) {
+    webSocket.loop();
+    delay(10);
+  }
+}
+
+bool verificarConexionBackend() {
+  if (WiFi.status() == WL_CONNECTED) {
+    HTTPClient http;
+    String url = API_BASE + "/health";
+    http.begin(url);
+    http.setFollowRedirects(HTTPC_STRICT_FOLLOW_REDIRECTS);
+    int code = http.GET();
+    Serial.printf("[HEALTH] HTTP code: %d\n", code);
+    if (code == 200) {
+      String payload = http.getString();
+      Serial.println("[HEALTH] payload: " + payload);
+    }
+    http.end();
+    return (code == 200);
+  }
+  return false;
+}
+
+void mostrarMenuLogin() {
+  lcd.clear();
+  lcd.print("LOGIN OPCIONES:");
+  lcd.setCursor(0,1);
+  lcd.print("1=Manual, wait API");
+  loginManualActivo = false;
+  userName = "";
+  logeado = false;
+}
+
+void procesarLoginManual(char key) {
+  static String username = "";
+  static String password = "";
+  static bool ingresandoUsuario = true;
+
+  // iniciar con '1'
+  if (key == '1' && !loginManualActivo) {
+    loginManualActivo = true;
+    username = "";
+    password = "";
+    ingresandoUsuario = true;
+    lcd.clear(); lcd.print("Usuario:"); lcd.setCursor(0,1);
+    return;
+  }
+
+  // cancelar
+  if (key == '*') {
+    username = ""; password = ""; ingresandoUsuario = true;
+    loginManualActivo = false;
+    mostrarMenuLogin();
+    return;
+  }
+
+  if (!loginManualActivo) return;
+
+  // '#' finaliza campo
+  if (key == '#') {
+    if (ingresandoUsuario) {
+      ingresandoUsuario = false;
+      lcd.clear(); lcd.print("Clave:"); lcd.setCursor(0,1);
+      return;
+    } else {
+      // intentar login
+      lcd.clear(); lcd.print("Autenticando...");
+      bool ok = loginESP32(username, password);
+      if (ok) {
+        lcd.clear(); lcd.print("Login exitoso");
+        delayWithWebSocket(800);
+
+        // nombre: preferimos userName obtenido; si no, extraer del token
+        if (userName.length() == 0 && tokenActual.length()) {
+          String nm = getNameFromJWT(tokenActual);
+          if (nm.length()) userName = nm;
+        }
+
+        lcd.clear(); lcd.print("Bienvenido:");
+        lcd.setCursor(0,1);
+        lcd.print(userName);
+        delayWithWebSocket(1500);
+
+        lcd.clear(); lcd.print("SISTEMA CONTROL");
+        lcd.setCursor(0,1); lcd.print("LED Y MOTOR");
+        delayWithWebSocket(4000);
+
+        mostrarMenuPrincipal();
+      } else {
+        lcd.clear(); lcd.print("Login incorrecto");
+        delayWithWebSocket(1500);
+        mostrarMenuLogin();
+      }
+      // resetear
+      username = ""; password = ""; ingresandoUsuario = true; loginManualActivo = false;
+      return;
+    }
+  }
+
+  // añadir caracter
+  if (ingresandoUsuario) {
+    username += key;
+    lcd.setCursor(0,1);
+    lcd.print(username);
+  } else {
+    password += key;
+    lcd.setCursor(0,1);
+    lcd.print(String(password.length(), '*'));
+  }
+}
+
+// POST /auth/login con user/pass desde teclado
+bool loginESP32(String username, String password) {
+  if (WiFi.status() != WL_CONNECTED) return false;
+  HTTPClient http;
+  String url = API_BASE + "/auth/login";
+  http.begin(url);
+  http.addHeader("Content-Type", "application/json");
+
+  StaticJsonDocument<256> doc;
+  doc["username"] = username;
+  doc["password"] = password;
+  String body; serializeJson(doc, body);
+
+  int code = http.POST(body);
+  Serial.printf("[LOGIN] HTTP %d\n", code);
+
+  if (code == 200) {
+    String resp = http.getString();
+    StaticJsonDocument<512> response;
+    DeserializationError err = deserializeJson(response, resp);
+    if (err) { Serial.println("[LOGIN] JSON parse error"); http.end(); return false; }
+    tokenActual = response["access_token"].as<String>();
+    // Try to get name from token or from response body (if present)
+    if (response.containsKey("name")) userName = response["name"].as<String>();
+    else {
+      String nm = getNameFromJWT(tokenActual);
+      if (nm.length()) userName = nm;
+    }
+    logeado = true;
+    http.end();
+    return true;
+  } else {
+    Serial.println("[LOGIN] Código != 200");
+    http.end();
+    return false;
+  }
+}
+
+// ================= CONTROL LED/MOTOR =================
+void toggleLed() {
+  if (!logeado) return;
+  digitalWrite(ledPin1, !digitalRead(ledPin1));
+  enviarAccionBackend(digitalRead(ledPin1) ? "LED_ON" : "LED_OFF");
+}
+
+void iniciarGiroMotor(bool dir) {
+  if (!logeado) return;
+  motorGirando = true;
+  direccionMotor = dir;
+  pasosRestantes = pasosPorVuelta;
+  porcentajeActual = 0;
+
+  digitalWrite(ledPin4, LOW); // indicador ocupado
+  digitalWrite(dir ? ledPin5 : ledPin3, HIGH);
+  digitalWrite(dir ? ledPin3 : ledPin5, LOW);
+
+  enviarAccionBackend(dir ? "MOTOR_DER" : "MOTOR_IZQ");
+}
+
+void pararMotor() {
+  motorGirando = false;
+  digitalWrite(IN1, LOW); digitalWrite(IN2, LOW);
+  digitalWrite(IN3, LOW); digitalWrite(IN4, LOW);
+  digitalWrite(ledPin3, LOW); digitalWrite(ledPin5, LOW);
+  digitalWrite(ledPin4, HIGH);
+  enviarAccionBackend("MOTOR_STOP");
+}
+
+void ejecutarPaso(bool dir) {
+  if (dir) pasoActual = (pasoActual + 1) % 8;
+  else pasoActual = (pasoActual + 7) % 8;
+
+  digitalWrite(IN1, pasoSecuencia[pasoActual][0]);
+  digitalWrite(IN2, pasoSecuencia[pasoActual][1]);
+  digitalWrite(IN3, pasoSecuencia[pasoActual][2]);
+  digitalWrite(IN4, pasoSecuencia[pasoActual][3]);
+}
+
+void actualizarPorcentaje() {
+  lcd.setCursor(0,1);
+  lcd.print("Avance: ");
+  lcd.print(porcentajeActual);
+  lcd.print("%  ");
+}
+
+// ================= MENUS =================
+void mostrarMenuPrincipal() {
+  menuNivel = 0;
+  lcd.clear();
+  lcd.print("SELECT OPTION");
+  lcd.setCursor(0,1);
+  lcd.print("1.LED 2.MOTOR");
+}
+
+void mostrarMenuLED() {
+  menuNivel = 1;
+  lcd.clear();
+  lcd.print("LED MENU");
+  lcd.setCursor(0,1);
+  lcd.print("1=ON 2=OFF *=BACK");
+}
+
+void mostrarMenuMotor() {
+  menuNivel = 2;
+  lcd.clear();
+  lcd.print("MOTOR MENU");
+  lcd.setCursor(0,1);
+  lcd.print("1.<= 2.STOP 3.=>");
+}
+
+void procesarTeclado(char key) {
+  switch(menuNivel) {
+    case 0:
+      if (key == '1') mostrarMenuLED();
+      else if (key == '2') mostrarMenuMotor();
+      break;
+    case 1:
+      if (key == '1') { digitalWrite(ledPin1, HIGH); enviarAccionBackend("LED_ON"); }
+      else if (key == '2') { digitalWrite(ledPin1, LOW); enviarAccionBackend("LED_OFF"); }
+      else if (key == '*') mostrarMenuPrincipal();
+      break;
+    case 2:
+      if (key == '1') iniciarGiroMotor(false);
+      else if (key == '2') pararMotor();
+      else if (key == '3') iniciarGiroMotor(true);
+      else if (key == '*') mostrarMenuPrincipal();
+      break;
+  }
+}
+
+// ================= WEBSOCKET HANDLER =================
+void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
+  switch(type) {
+    case WStype_DISCONNECTED:
+      Serial.println("[WS] disconnected");
+      break;
+    case WStype_CONNECTED:
+      Serial.println("[WS] connected");
+      break;
+    case WStype_TEXT: {
+      StaticJsonDocument<512> doc;
+      DeserializationError err = deserializeJson(doc, payload, length);
+      if (err) { Serial.println("[WS] JSON parse error"); return; }
+      String tipo = doc["type"] | "";
+
+      if (tipo == "login") {
+        bool loginOk = doc["success"] | false;
+        if (loginOk) {
+          if (doc.containsKey("token")) tokenActual = doc["token"].as<String>();
+          if (doc.containsKey("name")) userName = doc["name"].as<String>();
+          // fallback: try extract name from token
+          if (userName.length() == 0 && tokenActual.length()) {
+            String nm = getNameFromJWT(tokenActual);
+            if (nm.length()) userName = nm;
+          }
+          logeado = true;
+          lcd.clear(); lcd.print("Login exitoso");
+          delayWithWebSocket(600);
+          lcd.clear(); lcd.print("Bienvenido:");
+          lcd.setCursor(0,1); lcd.print(userName);
+          delayWithWebSocket(1500);
+          lcd.clear(); lcd.print("SISTEMA CONTROL");
+          lcd.setCursor(0,1); lcd.print("LED Y MOTOR");
+          delayWithWebSocket(4000);
+          mostrarMenuPrincipal();
+        } else {
+          lcd.clear(); lcd.print("Login incorrecto");
+          delayWithWebSocket(1200);
+          mostrarMenuLogin();
+        }
+      } else if (tipo == "action_execute") {
+        int actionId = doc["action_id"] | 0;
+        Serial.printf("[WS] action_execute id=%d\n", actionId);
+        if (actionId > 0) confirmarAccion(actionId);
+      } else {
+        Serial.println("[WS] otro tipo: " + tipo);
+      }
+      break;
+    }
+    default:
+      break;
+  }
+}
+
+// ================= BACKEND HTTP =================
+void enviarAccionBackend(String tipoAccion) {
+  if (WiFi.status() != WL_CONNECTED || !logeado) return;
+
+  HTTPClient http;
+  String url = API_BASE + "/actions/";
+  http.begin(url);
+  http.addHeader("Content-Type", "application/json");
+  if (tokenActual.length()) http.addHeader("Authorization", "Bearer " + tokenActual);
+
+  StaticJsonDocument<256> doc;
+  doc["device_id"] = 1;
+  doc["action_type"] = tipoAccion;
+  String body; serializeJson(doc, body);
+
+  int code = http.POST(body);
+  Serial.printf("[POST /actions] code=%d\n", code);
+  if (code == 200 || code == 201) {
+    String resp = http.getString();
+    StaticJsonDocument<256> response;
+    if (deserializeJson(response, resp) == DeserializationError::Ok) {
+      int action_id = response["id"] | 0;
+      if (action_id > 0) confirmarAccion(action_id);
+    }
+  }
+  http.end();
+}
+
+void confirmarAccion(int action_id) {
+  if (WiFi.status() != WL_CONNECTED || !logeado) return;
+
+  HTTPClient http;
+  String url = API_BASE + "/actions/device/confirm/" + String(action_id);
+  http.begin(url);
+  http.addHeader("Content-Type", "application/json");
+  if (tokenActual.length()) http.addHeader("Authorization", "Bearer " + tokenActual);
+  int code = http.POST("{}");
+  Serial.printf("[POST /confirm] id=%d code=%d\n", action_id, code);
+  http.end();
+}
+
+// ================= UTIL - JWT name from payload =================
+static int b64val(char c) {
+  if (c >= 'A' && c <= 'Z') return c - 'A';
+  if (c >= 'a' && c <= 'z') return c - 'a' + 26;
+  if (c >= '0' && c <= '9') return c - '0' + 52;
+  if (c == '+') return 62;
+  if (c == '/') return 63;
+  return -1;
+}
+
+String base64UrlDecodeToString(const String &input) {
+  String s = input;
+  s.replace('-', '+');
+  s.replace('_', '/');
+  while (s.length() % 4) s += '=';
+  int len = s.length();
+  String out = "";
+  int i = 0;
+  while (i < len) {
+    int a = b64val(s[i++]);
+    int b = b64val(s[i++]);
+    int c = b64val(s[i++]);
+    int d = b64val(s[i++]);
+    if (a < 0 || b < 0) break;
+    char o1 = (char)((a << 2) | ((b & 0x30) >> 4));
+    out += o1;
+    if (c < 0) break;
+    char o2 = (char)(((b & 0x0F) << 4) | ((c & 0x3C) >> 2));
+    out += o2;
+    if (d < 0) break;
+    char o3 = (char)(((c & 0x03) << 6) | d);
+    out += o3;
+  }
+  return out;
+}
+
+String getNameFromJWT(const String &jwt) {
+  int firstDot = jwt.indexOf('.');
+  if (firstDot < 0) return "";
+  int secondDot = jwt.indexOf('.', firstDot + 1);
+  if (secondDot < 0) return "";
+  String payloadB64 = jwt.substring(firstDot + 1, secondDot);
+  String payloadJson = base64UrlDecodeToString(payloadB64);
+  if (payloadJson.length() == 0) return "";
+  StaticJsonDocument<512> doc;
+  if (deserializeJson(doc, payloadJson) != DeserializationError::Ok) return "";
+  if (doc.containsKey("name")) return String((const char*)doc["name"]);
+  if (doc.containsKey("username")) return String((const char*)doc["username"]);
+  return "";
+}

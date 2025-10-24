@@ -29,7 +29,6 @@ def create_device(
 # ===============================================================
 @router.get("/", response_model=List[DeviceRead])
 def list_devices(
-    # 🟢 CORRECCIÓN
     session: Session = Depends(get_session)
 ):
     return session.exec(select(Device)).all()
